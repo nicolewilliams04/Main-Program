@@ -53,8 +53,8 @@ def drawboard():
    board.forward(200)
    board.backward(200)
    board.right(90)
-   board.left(90)
-   board.forward(200)
+ board.left(90)
+ board.forward(200)
  #Outer-lining of board
  for i in range(8):
    board.right(90) #Setting position so turtle can draw circle from the centre instead of to the right or left
@@ -64,7 +64,12 @@ def drawboard():
    board.left(90)
    board.forward(123.5)
    board.left(22.5) #Reseting position to continue loop
-  board
+ #Wraping things up
+ board.penup()
+ os.system("clear")
+ print("Game board completed - 100%")
+ time.sleep(1)
+ os.system("clear")
 
 #Defining to label board
 #Labelling points of board (using point turtle)
@@ -84,7 +89,6 @@ def label():
     point.goto(i)
     x = x+1
     point.write(x, font=style)
-  point.hideturtle()
   #Wraping things up
   os.system("clear")
   print("Game board completed - 100%")
