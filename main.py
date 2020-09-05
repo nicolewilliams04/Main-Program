@@ -70,6 +70,30 @@ def drawboard():
  print("Game board completed - 100%")
  time.sleep(1)
  os.system("clear")
+
+#Defining to label board
+#Labelling points of board (using point turtle)
+def label():
+  #Sets turtle shape, colour, style and speed
+  #Setting turtle to label board positions
+  point = turtle.Turtle()
+  point.shape("classic")
+  point.color("black")
+  point.speed("fastest")
+  style = ("Ariel", 10)
+  #Labelling board
+  point.penup()
+  xy = [(-3, -6), (30, 230), (210, 155), (285, -27), (210, -207), (-35, -280), (-215, -207), (-290, -27), (-215, 155)]
+  x = -1
+  for i in xy:
+    point.goto(i)
+    x = x+1
+    point.write(x, font=style)
+  #Wraping things up
+  os.system("clear")
+  print("Game board completed - 100%")
+  time.sleep(1)
+  os.system("clear")
  
 #Asking user if they'd like to play the game
 play = None
@@ -93,6 +117,7 @@ while cont not in ["Y", "y", "Yes", "yes", "N", "n", "No", "no"]: #Used for the 
  if cont in ["Y", "y", "Yes", "yes"]:
    os.system("clear")
    drawboard() #Loads/draws board
+   label()
  elif cont in ["N", "n", "No", "no"]:
    print("Goodbye!")
    exit() #Stops the rest of the code if the user wished to not play thus "exit"-ing the game/code
