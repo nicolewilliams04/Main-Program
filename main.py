@@ -22,12 +22,13 @@ def drawboard(): # Defining function to draw game board
  #Setting background size and colour
  turtle.setup(800, 600)
  wn = turtle.Screen()
- wn.bgcolor("white")
+ wn.bgcolor("floral white")
  # Sets turtle shape, colour and speed
  board = turtle.Turtle()
  board.shape("classic")
- board.color("black")
+ board.color("dim gray")
  board.speed("fastest")
+ board.pensize(3)
  # Gets turtle ready and in position
  board.showturtle()
  board.clear
@@ -43,6 +44,7 @@ def drawboard(): # Defining function to draw game board
 
  # Drawing the board
  os.system("clear")
+ time.sleep(1) # Waits a second before loading
  print("Loading game board...") # To give off a loading effect whilst drawing board as it takes a couple seconds
  # Segments of the board
  board.forward(200)
@@ -56,26 +58,38 @@ def drawboard(): # Defining function to draw game board
  board.left(90)
  board.forward(200)
  # Outer-lining of board
- for _ in range(8): # Repeats 8 times to outline the board star shape, connecting the dots and drawing the circle positions
-   board.right(90) # Setting position so turtle can draw circle from the centre instead of to the right or left
-   board.circle(27)
+ for i in range(8):
+   board.right(90) #Setting position so turtle can draw circle from the centre instead of to the right or left
+   board.fillcolor("linen") #Sets shape fill color
+   board.begin_fill() #Begins to fill shape (circle)
+   board.circle(29) #Draws circle with 29 radius
+   board.end_fill() #Stops filling shapes
    board.right(67.5)
    board.forward(123.5)
    board.left(90)
    board.forward(123.5)
-   board.left(22.5) # Reseting position to continue loop
+   board.left(22.5) #Reseting position to continue loop
+ #Filling in the centre circle as it isn't draw by command but by 1 step at a time
+ board.penup()
+ board.goto(27, 1)
+ board.pensize(0) #To not add onto the already thick outline
+ board.color("linen") #Blend in with other circle colour to not make too thick of a grey outline
+ board.pendown()
+ board.begin_fill() #Begins to fill shape (circle)
+ board.circle(26.75)
+ board.end_fill() #Stops filling shapes
  board.hideturtle()
 
 def label(): # Labelling points of board (using point turtle)
   # Sets turtle shape, colour, style and speed
   point = turtle.Turtle()
   point.shape("classic")
-  point.color("black")
+  point.color("dim gray")
   point.speed("fastest")
-  style = ("Ariel", 10) # Sets font style
+  style = ("Ariel", 12) # Sets font style
   # Labelling board
   point.penup()
-  new_position_xy = [(-3, -6), (30, 230), (210, 155), (285, -27), (210, -207), (-35, -280), (-215, -207), (-290, -27), (-215, 155)] # Making a list of coordinates to label poitns
+  new_position_xy = [(-4, -8), (30, 230), (210, 155), (285, -27), (210, -207), (-37, -280), (-217, -207), (-293, -27), (-218, 155)] # Making a list of coordinates to label poitns
   x = -1 
   for i in new_position_xy: # Goes from one coordinate to the next and prints off number which +1 as it moves on
     point.goto(i)
@@ -127,6 +141,7 @@ while cont not in ["y", "yes", "n", "no"]: # Used for the else code to repeat qu
  # cont = "y"
  cont = cont.lower() # Converts the input to all lowercase so it's not case sensitive
  if cont in ["y", "yes"]:
+   time.sleep(1) # Waits a few seconds
    os.system("clear")
    drawboard() # Loads/draws board using previously defined function
    label() # Labels board using previously defined function
@@ -140,14 +155,14 @@ while cont not in ["y", "yes", "n", "no"]: # Used for the else code to repeat qu
 
 # Setting positions of game pieces on board to specific coordinates
 pos_0 = (0, 1)
-pos_1 = (0, 257)
-pos_2 = (180, 181.5)
-pos_3 = (254.5, 1.5)
-pos_4 = (180, -179)
-pos_5 = (0, -253.5)
-pos_6 = (-180, -179)
-pos_7 = (-254.5, 1.5)
-pos_8 = (-180, 181.5)
+pos_1 = (0, 259)
+pos_2 = (182, 183.5)
+pos_3 = (256.5, 1.5)
+pos_4 = (182, -181)
+pos_5 = (0, -255.5)
+pos_6 = (-181, -181)
+pos_7 = (-256.5, 1.5)
+pos_8 = (-182, 183.5)
 
 # Creating game pieces
 # Player tahi
@@ -157,7 +172,7 @@ for turtleName in ["a", "b", "c", "d"]: # For each for the letters in list, crea
   tahi[turtleName].hideturtle()
   tahi[turtleName].penup()
   tahi[turtleName].shape("circle")
-  tahi[turtleName].color("red")
+  tahi[turtleName].color("indian red")
   tahi[turtleName].speed("fastest")
   tahi[turtleName].shapesize(2.25)
 
@@ -168,7 +183,7 @@ for turtleName in ["a", "b", "c", "d"]:  # For each for the letters in list, cre
   rua[turtleName].hideturtle()
   rua[turtleName].penup()
   rua[turtleName].shape("circle")
-  rua[turtleName].color("blue")
+  rua[turtleName].color("steel blue")
   rua[turtleName].speed("fastest")
   rua[turtleName].shapesize(2.25)
 
@@ -297,7 +312,7 @@ while game_end == False: # Infinite loop, break with "break" command
   current_player = tahi if turn == "Tahi" else rua # Ternary operator
   for turtleName in ["a", "b", "c", "d"]:
     if pos[old_position] == current_player[turtleName]:
-      if pos[old_position].distance(new_position_xy) <= 256.0: # If the space between the turtle space and the new space is less than 256
+      if pos[old_position].distance(new_position_xy) <= 258.0: # If the space between the turtle space and the new space is less than 258
         empty_position_xy = pos[old_position]._position # Stare the empty position
         pos[old_position].goto(new_position_xy) # Move turtle to new position
         pos[new_position] = current_player[turtleName] # Update board state
@@ -312,7 +327,7 @@ while game_end == False: # Infinite loop, break with "break" command
     can_move = False
     for turtleName in ["a", "b", "c", "d"]:
       distance_from_empty = opponent[turtleName].distance(empty_position_xy)
-      if distance_from_empty <= 256.0:
+      if distance_from_empty <= 258.0:
         can_move = True # Can the oponent move to the empty space
         break
     if not can_move:
